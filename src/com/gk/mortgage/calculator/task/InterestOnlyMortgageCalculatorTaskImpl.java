@@ -6,6 +6,6 @@ public class InterestOnlyMortgageCalculatorTaskImpl implements MortgageCalculato
         https://www.bankrate.com/calculators/mortgages/mortgage-calculator.aspx
     */
     public double calculateMonthlyPayment(double principalAmount, double interestRate, int lengthOfTermInYears) {
-        return 2547;
+        return 1041.67;
     }
 }

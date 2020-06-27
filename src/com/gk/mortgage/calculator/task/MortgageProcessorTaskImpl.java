@@ -2,7 +2,7 @@ package com.gk.mortgage.calculator.task;
 
 public class MortgageProcessorTaskImpl implements MortgageProcessorTask {
 
-    private MortgageCalculatorTask mortgageCalculatorTask;
+    private final MortgageCalculatorTask mortgageCalculatorTask;
 
     public MortgageProcessorTaskImpl(MortgageCalculatorTask mortgageCalculatorTask) {
         this.mortgageCalculatorTask = mortgageCalculatorTask;

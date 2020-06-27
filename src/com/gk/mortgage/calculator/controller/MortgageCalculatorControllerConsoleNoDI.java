@@ -2,10 +2,7 @@ package com.gk.mortgage.calculator.controller;
 
 import com.gk.mortgage.calculator.domain.MortgageCalculatorRequest;
 import com.gk.mortgage.calculator.domain.MortgageCalculatorResponse;
-import com.gk.mortgage.calculator.task.MortgageProcessorTask;
-import com.gk.mortgage.calculator.task.MortgageProcessorTaskImpl;
-import com.gk.mortgage.calculator.task.ValidateInputTask;
-import com.gk.mortgage.calculator.task.ValidateInputTaskImpl;
+import com.gk.mortgage.calculator.task.*;
 
 
 /*
@@ -17,16 +14,17 @@ public class MortgageCalculatorControllerConsoleNoDI {
 
     public MortgageCalculatorResponse calculateMonthlyPayment(MortgageCalculatorRequest request) {
 
-        /*MortgageProcessorTask mortgageProcessorTask = new MortgageProcessorTaskImpl();
+        // However, the processors still take whatever dependency we pass into the constructor.
+        MortgageProcessorTask mortgageProcessorTask = new MortgageProcessorTaskImpl(new FixedRateMortageCalculatorTaskImpl());
         ValidateInputTask validateInputTask = new ValidateInputTaskImpl();
 
         validateInputTask.validate(request);
-        return mortgageProcessorTask.process(
-                request.getPrincipalAmount(),
-                request.getInterestRate(),
-                request.getLengthOfTermInYears());
-
-         */
-        return null;
+        return new MortgageCalculatorResponse(
+                mortgageProcessorTask.process(
+                        request.getPrincipalAmount(),
+                        request.getInterestRate(),
+                        request.getLengthOfTermInYears()
+                )
+        );
     }
 }

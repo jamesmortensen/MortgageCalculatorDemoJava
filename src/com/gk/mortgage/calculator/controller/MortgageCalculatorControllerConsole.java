@@ -22,7 +22,6 @@ public class MortgageCalculatorControllerConsole {
     public MortgageCalculatorControllerConsole(MortgageProcessorTask mortgageProcessorTask, ValidateInputTask validateInputTask) {
         this.mortgageProcessorTask = mortgageProcessorTask;
         this.validateInputTask = validateInputTask;
-
     }
 
     /*
