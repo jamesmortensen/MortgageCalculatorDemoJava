@@ -24,9 +24,13 @@ public class Main {
 
     public static void main(String[] args) {
 
+        request = new MortgageCalculatorRequest(250000, 5.0, 30);
+        // run the calculator without Dependency injection.
+        response = (new MortgageCalculatorControllerConsoleNoDI()).calculateMonthlyPayment(request);
+        assertResponse(FIXED, request, response);
+
+
         request = new MortgageCalculatorRequest(250000, 5.0, 15);
-
-
         // run the calculator without Dependency injection.
         response = (new MortgageCalculatorControllerConsoleNoDI()).calculateMonthlyPayment(request);
         assertResponse(FIXED, request, response);
@@ -57,12 +61,21 @@ public class Main {
     private static void assertResponse(String type, MortgageCalculatorRequest req, MortgageCalculatorResponse res) {
         System.out.println(request);
         System.out.println(response);
-        if(type.equals(FIXED))
-            if(response.getMonthlyPayment() == 2547)
-                System.out.println("Pass");
-            else
-                System.out.println("FAIL! expect 2547 but got " + response.getMonthlyPayment());
-        else if(type.equals(INTEREST_ONLY))
+        if(type.equals(FIXED)) {
+            if(request.getLengthOfTermInYears() == 15) {
+                if (response.getMonthlyPayment() == 1976.984066853866)
+                    System.out.println("Pass");
+                else
+                    System.out.println("FAIL! expect 2547 but got " + response.getMonthlyPayment());
+            }
+            if(request.getLengthOfTermInYears() == 30) {
+                if (response.getMonthlyPayment() == 1342.0540575303496)
+                    System.out.println("Pass");
+                else
+                    System.out.println("FAIL! expect 1976.984066853866 but got " + response.getMonthlyPayment());
+            }
+
+        } else if(type.equals(INTEREST_ONLY))
             if(response.getMonthlyPayment() == 1041.67)
                 System.out.println("Pass");
             else
